@@ -1,0 +1,2 @@
+# Progamação Orientada a Objetos
+Paradigma de programação que represente conceitos do mundo real em código por meio de **objetos** e **classes** e suas interações. Um objeto contém **dados** e **código/procedimento**. Os estados de um objeto podem ser representados por variáveis.
