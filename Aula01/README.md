@@ -9,38 +9,3 @@ Funções são similares a em C, mas cada um com seu controle de acesso. Como pr
 Os construtores (inicializadores) tem o mesmo nome da classe e sem tipo declarado. Pode haver mais de um construtor.
 
 Os tipos de dados e operadores também são similares a C.
-
-```java
-// Classe Cadeira
-public class Cadeira{
-    // Variáveis de estado
-    private String posicao;
-    private boolean ocupado;
-
-    // Construtores
-    public Cadeira(){ // Vai criar uma cadeira com valores pré-definidos
-        ocupado
-    }
-
-    public Cadeira(String posicao, boolean ocupacao){ // Vai criar uma cadeira de acordo com os parâmetros passados
-        
-    }
-
-    // Funções
-    public void sentar(){
-
-    }
-
-    public void levantar(){
-
-    }
-
-    public void virar(){
-
-    }
-
-    public String getPosicao(){
-
-    }
-}
-```
