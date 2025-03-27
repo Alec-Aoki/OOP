@@ -9,3 +9,7 @@ Funções são similares a em C, mas cada um com seu controle de acesso. Como pr
 Os construtores (inicializadores) tem o mesmo nome da classe e sem tipo declarado. Pode haver mais de um construtor.
 
 Os tipos de dados e operadores também são similares a C.
+
+Compilar: ```javac tab.java ex1.java```
+
+Executar: ```java ex1```
