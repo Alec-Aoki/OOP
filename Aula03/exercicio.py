@@ -21,6 +21,7 @@ class Tabuleiro:
                 k += 1
 
 
+
 def main():
     # Lê a sequência de inteiros digitada pelo usuário como uma string, separa nos espaços, transforma em inteiros e transforma em uma lista
     seqEntrada = list(map(int, input().split()))
