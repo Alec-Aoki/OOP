@@ -67,11 +67,11 @@ public class Dado {
 	}
 
 	private String  s010 = "|  *  |\n",
-			s100 = "|*    |\n",
-			s001 = "|    *|\n",
-			s000 = "|     |\n",
-			s101 = "|*   *|\n",
-			s111 = "|* * *|\n";
+					s100 = "|*    |\n",
+					s001 = "|    *|\n",
+					s000 = "|     |\n",
+					s101 = "|*   *|\n",
+					s111 = "|* * *|\n";
 
 	/**
 	 * Transforma representação do dado em String. É mostrada
