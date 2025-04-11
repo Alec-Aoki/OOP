@@ -16,8 +16,8 @@ class Dados:
     padrão são 6 e None, respectivamente.
 
     Parâmetros:
-    n (int): quantidade de lados do dado
-    seed (int): seed para geração do número aleatório
+    n (int): quantidade de lados do dado. Default = 6
+    seed (int): seed para geração do número aleatório. Default = None
     """
     def __init__(self, n = 6, seed = None):
         self.lados = n # Define o número de lados do dado
@@ -33,7 +33,7 @@ class Dados:
     self.valor (int): novo valor dado
     """
     def rolar(self):
-        self.valor = random.randint(1, self.lados + 1) # Gera um valor aleatório para definir como valor do dado
+        self.valor = random.randint(1, self.lados) # Gera um valor aleatório para definir como valor do dado
 
         return self.valor # Retorna o valor do dado
     
