@@ -10,6 +10,14 @@ class Placar:
     """
 
     """
+    Construtor
+    """
+    def __init__(self):
+        self.placar = [0] * 10 # Vetor para representar as posições do placar e o valor em cada posição
+        self.ocupados = [False] * 10 # Vetor de booleanos que marca se uma posição do placar está ocupada
+        self.posicoes = 10 # Quantidade de posições no placar
+
+    """
     Adiciona uma sequência de dados a
     uma determinada posição do placar.
     Após a chamada, aquela posição se
@@ -21,31 +29,30 @@ class Placar:
     dados (int): array de tamanho 5 que representa os valores dos dados
     """
     def add(self, posicao, dados):
-        self.placar = [] # Vetor para representar as posições do placar e o valor em cada posição
-        self.ocupados = [] # Vetor de booleanos que marca se uma posição do placar está ocupada
-        self.posicoes = 10 # Quantidade de posições no placar
+        if (posicao < 1 or posicao > self.posicoes):
+            print("Valor da posição ilegal")
+            return
 
-        if(self.ocupados[posicao - 1]):
+        if (self.ocupados[posicao - 1]):
             print("Posição ocupada")
             return
         
+        
         k = 0
-        match posicao:
-            case 1:
-                k = conta(1, dados)
-            case 2:
-                k = conta(2, dados)
-            case 3:
-                k = conta(3, dados)
-            case 4:
-                k = conta(4, dados)
-            case 5:
-                k = conta(5, dados)
-            case 6:
-                k = conta(6, dados)
-            case _:
-                print("Valor da posição ilegal")
-                return
+        if (1 <= posicao <= 6):
+            k = self.conta(posicao, dados)
+        elif (posicao == 7):
+            if (self.checkFull(dados)):
+                k = 15 
+        elif (posicao == 8):
+            if (self.checkSeqMaior(dados)):
+                k = 30
+        elif (posicao == 9):
+            if (self.checkQuadra(dados)):
+                k = 20
+        elif (posicao == 10):
+            if (self.checkQuina(dados)):
+                k = 50
         
         self.placar[posicao - 1] = k
         self.ocupados[posicao - 1] = True
@@ -68,6 +75,7 @@ class Placar:
         return total
     
     # Função auxiliar
+    @staticmethod
     def conta(n, vet):
         cont = 0
 
@@ -79,21 +87,25 @@ class Placar:
     
     # Funções de pontuação
 
+    @staticmethod
     def checkFull(dados):
         v = copy.copy(dados)
         v.sort()
         return ( v[0] == v[1] and v[1] == v[2] and v[3] == v[4]) or ( v[0] == v[1] and v[2] == v[3] and v[3] == v[4])
     
+    @staticmethod
     def checkQuadra(dados):
         v = copy.copy(dados)
         v.sort()
         return ( v[0] == v[1] and v[1] == v[2] and v[2] == v[3]) or ( v[1] == v[2] and v[2] == v[3] and v[3] == v[4])
 
+    @staticmethod
     def checkQuina(dados):
         v = copy.copy(dados)
         v.sort()
         return ( v[0] == v[1] and v[1] == v[2] and v[2] == v[3] and v[3] == v[4])
 
+    @staticmethod
     def checkSeqMaior(dados):
         v = copy.copy(dados)
         v.sort()
@@ -107,20 +119,19 @@ class Placar:
     Retorno:
     stringFinal (string): string do placar
     """
+    def __str__(self):
+        return self.toString()
+
     # TLDR: Mágica de string
     def toString(self):
         stringFinal = ""
         for i in range(3):
-            # First column (positions 1-3)
             num1 = f"{self.placar[i]:<4}" if self.ocupados[i] else f"({i+1}) "
-            # Second column (positions 7-9)
             num2 = f"{self.placar[i+6]:<4}" if self.ocupados[i+6] else f"({i+7}) "
-            # Third column (positions 4-6)
             num3 = f"{self.placar[i+3]:<4}" if self.ocupados[i+3] else f"({i+4}) "
             
             stringFinal += f"{num1}   |   {num2}   |   {num3}\n--------------------------\n"
         
-        # Bottom row (position 10)
         num10 = f"{self.placar[9]:<4}" if self.ocupados[9] else "(10)"
         stringFinal += f"       |   {num10}   |\n       +----------+\n"
         return stringFinal

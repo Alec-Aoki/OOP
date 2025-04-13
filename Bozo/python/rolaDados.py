@@ -20,10 +20,8 @@ class rolaDados:
     """
     def __init__(self, quant = 5, seed = None):
         self.quant = quant # Quantidade de dados no conjunto
-
-        self.seed = seed # Definindo a seed do conjunto de dados
-        random.seed(self.seed) # Definindo a seed do gerador
-
+        random.seed(seed) # Definindo a seed do conjunto de dados
+        self.seed = seed
         self.dados = [d.Dados(6, seed) for _ in range(quant)] # Inicializando dados
 
     """
@@ -59,6 +57,9 @@ class rolaDados:
     Retorno:
     stringFinal (string): string do conjunto de dados
     """
+    def __str__(self):
+        return self.toString()
+
     def toString(self):
         string_dados = [dado.toString() for dado in self.dados] # Pegando a string de cada dado
 

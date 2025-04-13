@@ -1,7 +1,7 @@
 import bozo
 
 def main():
-    bozo.main()
+    bozo.Bozo.main()
 
 if __name__ == "__main__":
     main()

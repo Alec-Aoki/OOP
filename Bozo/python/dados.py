@@ -21,9 +21,9 @@ class Dados:
     """
     def __init__(self, n = 6, seed = None):
         self.lados = n # Define o número de lados do dado
-        self.seed = seed # Define a seed do dado
-        random.seed(self.seed) # Define a seed do gerador como a seed do dado
-        self.valor = self.rolar() # Inicializa o valor do dado
+        random.seed(seed) # Definindo a seed do dado
+        self.seed = seed
+        self.valor = self.rolar() # Rolando o dado
 
     """
     Simula a rolagem do dado por meio de um gerador
@@ -52,6 +52,9 @@ class Dados:
     Retorno:
     stringFinal (string): representação do valor do dado em string
     """
+    def __str__(self):
+        return self.toString()
+    
     def toString(self):
         # Tratamento de erro
         if(self.lados != 6):

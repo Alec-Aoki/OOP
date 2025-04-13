@@ -1,6 +1,6 @@
-import dados
-import rolaDados
-import placar
+import dados as d
+import rolaDados as rD
+import placar as plc
 
 class Bozo:
     """
@@ -14,25 +14,34 @@ class Bozo:
     e depois escolhe a posição do placar que
     deseja preencher
     """
+    @staticmethod
     def main():
         NRORODADAS = 10
 
-        print("Digite a semente (zero para aleatório): ")
+        print("Digite a semente (zero para aleatório): ", end='')
+        pl = plc.Placar()
+        print(pl)
         seed = int(input())
 
-        rd = rolaDados(5, seed)
-        pl = placar()
-        print(pl)
+        rd = rD.rolaDados(5, seed)
 
-        for rodada in NRORODADAS:
-            print("****** Rodada " + (rodada+1))
-            print("Pressione ENTER para lançar os dados")
-            input()
+        for rodada in range(NRORODADAS):
+            print(f"****** Rodada {rodada + 1}")
+            input("Pressione ENTER para lançar os dados")
 
+            # Primeira tentativa
             rd.rolar()
             print("1          2          3          4          5")
             print(rd)
 
+            # Segunda tentativa
+            print("Digite os números dos dados que quiser TROCAR. Separados por espaços.")
+            muda = input()
+            rd.rolar(muda)
+            print("1          2          3          4          5")
+            print(rd)
+
+            # Terceira tentativa
             print("Digite os números dos dados que quiser TROCAR. Separados por espaços.")
             muda = input()
             values = rd.rolar(muda)
@@ -45,8 +54,7 @@ class Bozo:
             pos = 0
             while (pos <= 0):
                 try:
-                    print("Escolha a posição que quer ocupar com essa jogada ===> ")
-                    pos = int(input())
+                    pos = int(input("Escolha a posição que quer ocupar com essa jogada ===> "))
                     if (pos > NRORODADAS or pos <= 0):
                         pos = 0
                     pl.add(pos, values)
@@ -61,6 +69,6 @@ class Bozo:
 
         print("***********************************")
         print("***")
-        print("*** Seu escore final foi: " + pl.getScore())
+        print(f"*** Seu escore final foi: {pl.getScore()}")
         print("***")
         print("***********************************")
