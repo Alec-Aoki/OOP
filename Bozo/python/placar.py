@@ -30,29 +30,27 @@ class Placar:
     """
     def add(self, posicao, dados):
         if (posicao < 1 or posicao > self.posicoes):
-            print("Valor da posição ilegal")
-            return
+            raise ValueError("Valor da posição ilegal")
 
         if (self.ocupados[posicao - 1]):
-            print("Posição ocupada")
-            return
+            raise ValueError("Posição ocupada")
         
         
         k = 0
         if (1 <= posicao <= 6):
-            k = self.conta(posicao, dados)
+            k = self.conta(posicao, dados) * posicao
         elif (posicao == 7):
             if (self.checkFull(dados)):
                 k = 15 
         elif (posicao == 8):
             if (self.checkSeqMaior(dados)):
-                k = 30
+                k = 20
         elif (posicao == 9):
             if (self.checkQuadra(dados)):
-                k = 20
+                k = 30
         elif (posicao == 10):
             if (self.checkQuina(dados)):
-                k = 50
+                k = 40
         
         self.placar[posicao - 1] = k
         self.ocupados[posicao - 1] = True
@@ -126,12 +124,18 @@ class Placar:
     def toString(self):
         stringFinal = ""
         for i in range(3):
-            num1 = f"{self.placar[i]:<4}" if self.ocupados[i] else f"({i+1}) "
-            num2 = f"{self.placar[i+6]:<4}" if self.ocupados[i+6] else f"({i+7}) "
-            num3 = f"{self.placar[i+3]:<4}" if self.ocupados[i+3] else f"({i+4}) "
-            
-            stringFinal += f"{num1}   |   {num2}   |   {num3}\n--------------------------\n"
+            num = f" {self.placar[i]:<3}" if self.ocupados[i] else f"({i+1}) "
+            stringFinal += num + "   |   "
+
+            num = f" {self.placar[i+6]:<3}" if self.ocupados[i+6] else f"({i+7}) "
+            stringFinal += num + "   |  "
+
+            num = f" {self.placar[i+3]:<3}" if self.ocupados[i+3] else f"({i+4}) "
+            stringFinal += num + "\n"
+            stringFinal += "-------|----------|-------\n"
         
-        num10 = f"{self.placar[9]:<4}" if self.ocupados[9] else "(10)"
-        stringFinal += f"       |   {num10}   |\n       +----------+\n"
+        num = f" {self.placar[9]:<3}" if self.ocupados[9] else "(10)"
+        stringFinal += "       |   " + num + "   |\n"
+        stringFinal += "       +----------+"
+        
         return stringFinal

@@ -24,15 +24,17 @@ class Bozo:
         seed = int(input())
 
         rd = rD.rolaDados(5, seed)
-
+        print("")
+        
         for rodada in range(NRORODADAS):
             print(f"****** Rodada {rodada + 1}")
-            input("Pressione ENTER para lançar os dados")
+            input("Pressione ENTER para lançar os dados\n")
 
             # Primeira tentativa
             rd.rolar()
             print("1          2          3          4          5")
             print(rd)
+            print("")
 
             # Segunda tentativa
             print("Digite os números dos dados que quiser TROCAR. Separados por espaços.")
@@ -40,6 +42,7 @@ class Bozo:
             rd.rolar(muda)
             print("1          2          3          4          5")
             print(rd)
+            print("")
 
             # Terceira tentativa
             print("Digite os números dos dados que quiser TROCAR. Separados por espaços.")
@@ -47,25 +50,41 @@ class Bozo:
             values = rd.rolar(muda)
             print("1          2          3          4          5")
             print(rd)
+            print("")
 
             print("\n\n")
             print(pl)
+            print("")
 
-            pos = 0
-            while (pos <= 0):
+            pos_add = False
+            while not pos_add:
                 try:
-                    pos = int(input("Escolha a posição que quer ocupar com essa jogada ===> "))
-                    if (pos > NRORODADAS or pos <= 0):
-                        pos = 0
+                    print("Escolha a posição que quer ocupar com essa jogada ===> ", end='')
+                    pos = input()
+                    if not pos.strip():
+                        continue
+                    
+                    try:
+                        pos = int(pos)
+                    except ValueError:
+                        print("Valor inválido. Posição ocupada ou inexistente.")
+                        continue
+                    
+                    if pos <= 0 or pos > NRORODADAS:
+                        print("Valor inválido. Posição ocupada ou inexistente.")
+                        continue
+                    
                     pl.add(pos, values)
-                except Exception:
-                    pos = 0
-
-                if (pos == 0):
+                    pos_add = True
+                    
+                except ValueError as e:
+                    print("Valor inválido. Posição ocupada ou inexistente.")
+                except Exception as e:
                     print("Valor inválido. Posição ocupada ou inexistente.")
 
             print("\n\n")
             print(pl)
+            print("")
 
         print("***********************************")
         print("***")

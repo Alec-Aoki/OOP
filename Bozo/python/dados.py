@@ -1,4 +1,4 @@
-import random
+from random import Random
 
 class Dados:
     """
@@ -21,9 +21,8 @@ class Dados:
     """
     def __init__(self, n = 6, seed = None):
         self.lados = n # Define o número de lados do dado
-        random.seed(seed) # Definindo a seed do dado
-        self.seed = seed
-        self.valor = self.rolar() # Rolando o dado
+        self.rd = Random(seed)
+        self.valor = self.rolar()
 
     """
     Simula a rolagem do dado por meio de um gerador
@@ -33,7 +32,7 @@ class Dados:
     self.valor (int): novo valor dado
     """
     def rolar(self):
-        self.valor = random.randint(1, self.lados) # Gera um valor aleatório para definir como valor do dado
+        self.valor = self.rd.randint(1, self.lados) # Gera um valor aleatório para definir como valor do dado
 
         return self.valor # Retorna o valor do dado
     
